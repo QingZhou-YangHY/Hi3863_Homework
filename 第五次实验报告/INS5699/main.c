@@ -60,7 +60,7 @@ void OledTask(void)
                     current_time.hour = 0;
                     current_time.day ++;
                     current_time.week ++;
-                    if(current_time.day >=31)//这里只写了设置的月份检验(4月份)
+                    if(current_time.day >=31)//这里只写了设置的4月份的检验
                     {
                         current_time.month ++;
                         current_time.day = 1;

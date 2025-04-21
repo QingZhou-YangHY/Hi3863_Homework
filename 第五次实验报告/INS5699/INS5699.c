@@ -54,6 +54,17 @@ ins5699s_time ins5699s_GetTime(void) {
     regData = ins5699s_ReadREG(INS5699S_REG_HOUR);
     time.hour = (regData >> 4) * 10 + (regData & 0x0F);
     // 读取星期
+    regData = ins5699s_ReadREG(INS5699S_REG_WEEK);
+    int flag = 1;
+    while(flag){
+        for(int i = 0;;i++){
+            if((regData >> i) & 1){
+                time.week = ((regData >> i)&0x0F);
+                flag = 0;
+                break;  
+            }
+        }
+    }
     time.week = ins5699s_ReadREG(INS5699S_REG_WEEK);
     // 读取日
     regData = ins5699s_ReadREG(INS5699S_REG_DAY);
@@ -78,7 +89,8 @@ void ins5699s_SetTime(ins5699s_time time) {
     regData = (time.hour / 10) << 4 | (time.hour % 10);
     ins5699s_SendREG(INS5699S_REG_HOUR, regData);
     //设置星期
-    ins5699s_SendREG(INS5699S_REG_WEEK, time.week);
+    regData = 1 << (time.week - 1);
+    ins5699s_SendREG(INS5699S_REG_WEEK, regData);
     //设置日
     regData = (time.day / 10) << 4 | (time.day % 10);
     ins5699s_SendREG(INS5699S_REG_DAY, regData);
