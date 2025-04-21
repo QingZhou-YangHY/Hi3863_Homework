@@ -1,0 +1,8 @@
+#===============================================================================
+# @brief    Kconfig file.
+# Copyright (c) HiSilicon (Shanghai) Technologies Co., Ltd. 2024-2024. All rights reserved.
+#===============================================================================
+config BLINKY_PIN
+    int
+    prompt "Choose blinky pin."
+    default 2
