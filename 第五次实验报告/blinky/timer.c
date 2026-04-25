@@ -42,7 +42,7 @@ void TimerCallback(uintptr_t data)
         if(g_timer_info.minute >= 60){
             g_timer_info.minute = 0;
             g_timer_info.hour ++;
-            if(g_timer_info.hour >= 60){
+            if(g_timer_info.hour >= 24){
                 g_timer_info.hour = 0;
             }
         }
